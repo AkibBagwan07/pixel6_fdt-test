@@ -1,0 +1,19 @@
+.heading_container{
+  display: flex;
+  justify-content: space-around;
+   flex-wrap: wrap;
+   height: 70px;
+}
+
+p{
+    width: 15%;
+}
+
+.heading_container > img{
+    width: 60px;
+    height: 60px;
+}
+
+.id{
+    width: 9%;
+}

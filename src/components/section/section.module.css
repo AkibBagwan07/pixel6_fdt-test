@@ -1,0 +1,107 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    margin: 32px;
+    align-items: center;
+}
+
+.filter_container{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filterIcon{
+    font-size: 24px;
+    color: brown;
+}
+
+.filter_container > select {
+    width: 40%;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid rgb(167, 163, 163);
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.content_table{
+    margin: 16px 48px 16px 48px;
+    border-radius: 16px; 
+    border: 1px solid rgb(167, 163, 163);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+@media(max-width:600px){
+    .container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+   .filter_container{
+     width: 100%;
+     justify-content: space-around;
+   }
+   .filter_container > select:focus {
+    width: 50%;
+}
+.content_table{
+    margin: 0;
+}
+}
+
+.heading_container{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.heading_container > p{
+    font-weight: 700;
+}
+
+.id{
+    width: 9%;
+}
+
+.image{
+    width: 5%;
+}
+
+.idUpArrow{
+    position: absolute;
+    left: 7.5%;
+    top: 38%;
+    font-size: 12px;
+    color: gray;
+}
+
+.idDownArrow{
+    position: absolute;
+    left: 8%;
+    top: 38%;
+    font-size: 12px;
+    color: brown;
+}
+
+.fullnameUpArrow{
+    position: absolute;
+    left: 35.5%;
+    top: 38%;
+    font-size: 12px;
+    color: gray;
+}
+
+.fullnameDownArrow{
+    position: absolute;
+    left: 36%;
+    top: 38%;
+    font-size: 12px;
+    color: brown;
+}
