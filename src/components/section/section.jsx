@@ -14,7 +14,8 @@ const Section = () => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [gender, setGender] = useState(null)
-    // console.log(gender)
+    const [country,setCountry] = useState(null)
+    // console.log(country)
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     
@@ -22,10 +23,15 @@ const Section = () => {
     // console.log(indexOfLastRecord)
    
     // filtering based on country not possible person's country and company's country is same (i.e-united states) for all person's data
-    // const set = new Set()
-    // data.map((ele) => set.add(ele.company.address.country))
-    // console.log(set)
+    const set = new Set()
+    data.map((ele) => set.add(ele.company.address.country))
+    const allCountries = [...set]
     
+    const handleCountryFilter = (e) => { 
+        setCountry(e.target.value)
+        setData(allData)
+    }
+
     useEffect(() => {
         (async function () {
             try {
@@ -73,14 +79,23 @@ const Section = () => {
     }
 
     // for displaying data onChange of gender filter
-    useEffect(() => { 
+    useEffect(() => {
+        
         const newData = []
-        data.map((ele) => { 
-            if (gender.toString() === ele.gender.toString())
-                newData.push(ele)
+        data.map((ele) => {
+            if (gender) {
+                if (gender.toString() === ele.gender.toString())
+                    newData.push(ele)
+            }
+            else { 
+                if (country) { 
+                    if (country.toString() === ele.address.country.toString())
+                        newData.push(ele)
+                }
+            }
         })
         setData(newData)
-    },[gender])
+    },[gender],[country])
 
     return (
         <div>
@@ -88,9 +103,12 @@ const Section = () => {
           <h1>Employees</h1>
             <div className={ styles.filter_container}>
               <FaFilter className={styles.filterIcon} />
-              <select name="country" id="">
-                    <option style={{display:"none"}} value="" >Country</option>
-                    <option value="">USA</option>
+              <select onChange={handleCountryFilter} name="country" id="">
+                    <option style={{ display: "none" }} value="" >Country</option>
+                        {allCountries.map((ele) => { return(
+                            <option value={ele}>{ele}</option>)
+                         }) }
+                    {/* <option value="United States">USA</option> */}
               </select>
               <select onChange={handleGenderFilter} name="gender" id="">
                     <option style={{display:"none"}} value="" >Gender</option>
