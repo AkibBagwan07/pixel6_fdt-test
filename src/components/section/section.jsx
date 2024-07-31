@@ -7,6 +7,7 @@ import { FaFilter } from "react-icons/fa";
 import Cards from "../recordCards/recordCards";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { FaLongArrowAltDown } from "react-icons/fa";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Section = () => {
     const api = "https://dummyjson.com/users?limit=208"
@@ -15,6 +16,7 @@ const Section = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [gender, setGender] = useState(null)
     const [country,setCountry] = useState(null)
+    const [loading,setLoading] = useState(null)
     // console.log(country)
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -35,12 +37,15 @@ const Section = () => {
     useEffect(() => {
         (async function () {
             try {
+                setLoading(true)
                 const res = await axios.get(`${api}`)
               //  console.log(res.data.users)
                 setAllData(res.data.users)
                 setData(res.data.users)
             } catch (error) {
                 console.log(error)
+            } finally{
+                setLoading(false)
             }
         })()
     }, [])
@@ -117,6 +122,7 @@ const Section = () => {
               </select>
                 </div>    
             </div>
+            {loading ? <CircularProgress /> :
             <div onWheel={paginate} className={styles.content_table}>
                 <div className={styles.heading_container}>
                     <p className={styles.id}>ID</p><FaArrowUpLong className={ styles.idUpArrow} /><FaLongArrowAltDown className={ styles.idDownArrow} />
@@ -127,9 +133,9 @@ const Section = () => {
               <p>Location</p>
                 </div>
                 <hr style={{width:"100%"}}/>
-            {currentRecords?.map((ele) => { 
+            {currentRecords?.map((ele,idx) => { 
                 return (
-                    <Cards key={ele.id}
+                    <Cards  key={idx}
                         id={ele.id}
                         imgSrc={ele.image}
                         firstName={ele.firstName}
@@ -141,7 +147,7 @@ const Section = () => {
                         state={ele.address?.state} />
                 )
             })}
-            </div>
+            </div>}
         </div>
         
   )

@@ -15,6 +15,7 @@ const Cards = ({ id, imgSrc, firstName, lastName, gender, age, position, middleN
           </div>
           <hr />
     </div>
+
   )
 }
 
